@@ -195,13 +195,28 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => '/system/user/',
+            'url'  => '/system/user/1',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
+        ],
+        ['header' => 'ادارة اماكن الوجبات الصحية'],
+        [
+            'text'    => 'اماكن الوجبات الصحية',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'اضافة',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'عرض الوجبات',
+                    'url'     => '#',
+                ],
+            ],
         ],
         [
             'text'    => 'multilevel',
