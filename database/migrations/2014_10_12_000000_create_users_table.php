@@ -21,6 +21,20 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            // added by us
+            $table->string('phone');
+            $table->date('birth_day');
+            $table->date('home_address');
+            $table->string('cv')->nullable();
+            $table->string('gender');
+            $table->string('qualification');
+            $table->string('avatar');
+            $table->string('adjective');
+            $table->string('nationality');
+            // for nutritionist to patients relation (1 to *)
+            $table->unsignedBigInteger('nutritionist_id');
+            $table->foreign('nutritionist_id')->references('id')->on('users');
         });
     }
 
