@@ -39,4 +39,43 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // relation added by us
+    public function adime()
+    {
+        return $this->hasOne('App\ADIME', 'patient_id');
+    }
+
+    // for patient
+    public function foodSystem()
+    {
+        return $this->hasOne('App\FoodSystem', 'patient_id');
+    }
+
+    // for nutritionist
+    public function preparedFoodSystems()
+    {
+        return $this->hasMany('App\FoodSystem', 'nutritionist_id');
+    }
+
+    // nutritionist follows patient
+    public function followingPatient()
+    {
+        return $this->hasMany('App\User', 'nutritionist_id');
+    }
+
+    public function followerNutritionist()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    // patient data
+    public function informatios()
+    {
+        return $this->hasMany('App\PatientData', 'patient_id');
+    }
+
+    
+
 }
