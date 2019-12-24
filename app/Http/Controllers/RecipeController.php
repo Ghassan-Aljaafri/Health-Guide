@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,12 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        return view('system.recipes.create');
+        $user = Auth::user();
+        if ($user->hasRole('nutritionist')) {
+            return view('system.recipes.create');
+        } else {
+            return redirect('system');
+        }
     }
 
     /**
@@ -43,14 +53,18 @@ class RecipeController extends Controller
             'preparing_method' => 'required',
         ]);
 
-        $recipe = new Recipe();
-        $recipe->name = request('name');
-        $recipe->ingredients = request('ingredients');
-        $recipe->preparing_method = request('preparing_method');
-        $recipe->nutritionist_id = Auth::user()->id;
-        $recipe->save();
-
-        return redirect('system/recipe')->with('success', 'recipe created successfuly');
+        $user = Auth::user();
+        if ($user->hasRole('nutritionist')) {
+            $recipe = new Recipe();
+            $recipe->name = request('name');
+            $recipe->ingredients = request('ingredients');
+            $recipe->preparing_method = request('preparing_method');
+            $recipe->nutritionist_id = $user->id;
+            $recipe->save();
+            return redirect('system/recipe')->with('success', 'recipe created successfuly');
+        } else {
+            return redirect('system');
+        }
     }
 
     /**
@@ -61,7 +75,10 @@ class RecipeController extends Controller
      */
     public function show($id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        return view('system.recipes.show', [
+            'recipe' => $recipe
+        ]);
     }
 
     /**
@@ -72,7 +89,13 @@ class RecipeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        if (Auth::user()->id == $recipe->nutritionist_id) {
+            return view('system.recipes.edit', [
+                'recipe' => $recipe
+            ]);
+        }
+        return redirect('/system/recipe')->with('error', 'you can\'t edit this post');
     }
 
     /**
@@ -84,7 +107,19 @@ class RecipeController extends Controller
      */
     public function update($id)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'ingredients' => 'required',
+            'preparing_method' => 'required',
+        ]);
+
+        $recipe = Recipe::findOrFail($id);
+        $recipe->name = request('name');
+        $recipe->ingredients = request('ingredients');
+        $recipe->preparing_method = request('preparing_method');
+        $recipe->save();
+
+        return redirect('system/recipe')->with('success', 'recipe edit successfuly');
     }
 
     /**
@@ -95,6 +130,11 @@ class RecipeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $recipe = Recipe::findOrFail($id);
+        if (Auth::user()->id == $recipe->nutritionist_id) {
+            $recipe->delete();
+            return redirect('system/recipe')->with('success', 'recipe deleted successfully');
+        }
+        return redirect('/system/recipe')->with('error', 'you can\'t delete this post');
     }
 }

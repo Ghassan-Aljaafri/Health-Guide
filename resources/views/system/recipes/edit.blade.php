@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create Recipe')
+@section('title', 'Edit Recipe')
 
 @section('content_header')
-    <h1>Create New Recipe</h1>
+    <h1>Edit New Recipe</h1>
     <hr>
 @endsection
 
@@ -37,22 +37,20 @@
 @endsection
 
 @section('content')
-    <form action="{{ url("system/recipe") }}" method="POST">
+    <form action="{{ url("system/recipe/". $recipe->id) }}" method="POST">
+        @method('PATCH')
         @csrf
         <div class="form-group">
-        <label for="name">Recipe Name</label>
-        <input type="text"
-            class="form-control" name="name" id="name">
+            <label for="name">Recipe Name</label>
+            <input type="text" class="form-control" name="name" id="name" value="{{$recipe->name}}">
         </div>
         <div class="form-group">
-        <label for="ingredients">ingredients</label>
-        <input type="text"
-            class="form-control" name="ingredients" id="ingredients" >
+            <label for="ingredients">ingredients</label>
+            <input type="text" class="form-control" name="ingredients" id="ingredients" value="{{$recipe->ingredients}}" >
         </div>
         <div class="form-group">
-        <label for="preparing_method">Preparing Method</label>
-            <textarea type="text" rows="5"
-            class="form-control" name="preparing_method" id="preparing_method"></textarea>
+            <label for="preparing_method">Preparing Method</label>
+            <textarea type="text" rows="5"class="form-control" name="preparing_method" id="preparing_method">{{$recipe->preparing_method}}</textarea>
         </div>
 
         <div class="form-group">
