@@ -22,6 +22,7 @@ Route::get('/system', function () {
 });
 
 Route::resource('/system/user', 'UserController');
+Route::resource('/system/recipe', 'RecipeController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

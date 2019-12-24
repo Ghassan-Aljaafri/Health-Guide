@@ -76,9 +76,8 @@ class User extends Authenticatable
         return $this->hasMany('App\PatientData', 'patient_id');
     }
 
-    public function writedRecipies()
+    public function writedRecipes()
     {
         return $this->hasMany('App\Recipe', 'nutritionist_id');
     }
-
 }

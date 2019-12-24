@@ -19,9 +19,9 @@ class CreateRecipesTable extends Migration
 
             // added by us
             $table->string('name');
-            $table->string('tngredients');
-            $table->string('how_to_prepare');
-            $table->string('image');
+            $table->string('ingredients');
+            $table->string('preparing_method');
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('nutritionist_id');
             $table->foreign('nutritionist_id')->references('id')->on('users');
         });

@@ -23,17 +23,17 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             // added by us
-            $table->string('phone');
-            $table->date('birth_day');
-            $table->date('home_address');
-            $table->string('cv')->nullable();
-            $table->string('gender');
-            $table->string('qualification');
-            $table->string('avatar');
-            $table->string('adjective');
-            $table->string('nationality');
+            $table->string('phone')->nullable();
+            $table->date('birth_day')->nullable();
+            $table->date('home_address')->nullable();
+            $table->string('cv')->nullable()->nullable();
+            $table->string('gender')->nullable();
+            $table->string('qualification')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('adjective')->nullable();
+            $table->string('nationality')->nullable();
             // for nutritionist to patients relation (1 to *)
-            $table->unsignedBigInteger('nutritionist_id');
+            $table->unsignedBigInteger('nutritionist_id')->nullable();
             $table->foreign('nutritionist_id')->references('id')->on('users');
         });
     }
