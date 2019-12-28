@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -195,7 +197,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => '/system/user/1',
+            'url'  => '/system/user/' . Auth::user()->id,
             'icon' => 'fas fa-fw fa-user',
         ],
         [
