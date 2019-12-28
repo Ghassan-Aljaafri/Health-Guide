@@ -13,15 +13,14 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        // Permission::create(['name' => 'edit articles']);
-        // Permission::create(['name' => 'delete articles']);
-        // Permission::create(['name' => 'publish articles']);
-        // Permission::create(['name' => 'unpublish articles']);
+        Permission::create(['name' => 'edit-recipe']);
+        Permission::create(['name' => 'delete-recipe']);
+        Permission::create(['name' => 'publish-recipe']);
+        Permission::create(['name' => 'unpublish-recipe']);
 
         // create roles and assign created permissions
 
@@ -31,12 +30,17 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // or may be done by chaining
         $role = Role::create(['name' => 'nutritionist']);
-        //$role->givePermissionTo(['publish articles', 'unpublish articles']);
+        $role->givePermissionTo([
+            'edit-recipe',
+            'delete-recipe',
+            'publish-recipe',
+            'unpublish-recipe'
+        ]);
 
         $role = Role::create(['name' => 'admin']);
         //$role->givePermissionTo(Permission::all());
 
         $role = Role::create(['name' => 'super-admin']);
-        // $role->givePermissionTo(Permission::all());
+        $role->givePermissionTo(Permission::all());
     }
 }
