@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        // $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -20,7 +22,7 @@ class RecipeController extends Controller
     public function index()
     {
         return view('system.recipes.index', [
-            'recipes' => Auth::user()->writedRecipes
+            'recipes' => Recipe::all()
         ]);
     }
 
@@ -35,7 +37,7 @@ class RecipeController extends Controller
         if ($user->hasRole('nutritionist')) {
             return view('system.recipes.create');
         } else {
-            return redirect('system');
+            return redirect('system/recipe')->with('error', "yor don't have a permission to create recipe");
         }
     }
 
@@ -51,6 +53,7 @@ class RecipeController extends Controller
             'name' => 'required|unique:recipes',
             'ingredients' => 'required',
             'preparing_method' => 'required',
+            'image' => 'required',
         ]);
 
         $user = Auth::user();
@@ -59,6 +62,14 @@ class RecipeController extends Controller
             $recipe->name = request('name');
             $recipe->ingredients = request('ingredients');
             $recipe->preparing_method = request('preparing_method');
+
+            $file = request()->file('image');
+            // Generate a file name with extension
+            $fileName = 'recipe-image-' . time() . '.' . $file->getClientOriginalExtension();
+            // Save the file
+            $file->storeAs('public/recipes-images', $fileName);
+            $recipe->image = $fileName;
+
             $recipe->nutritionist_id = $user->id;
             $recipe->save();
             return redirect('system/recipe')->with('success', 'recipe created successfuly');
@@ -114,12 +125,27 @@ class RecipeController extends Controller
         ]);
 
         $recipe = Recipe::findOrFail($id);
-        $recipe->name = request('name');
-        $recipe->ingredients = request('ingredients');
-        $recipe->preparing_method = request('preparing_method');
-        $recipe->save();
 
-        return redirect('system/recipe')->with('success', 'recipe edit successfuly');
+        if (Auth::user()->id == $recipe->nutritionist_id) {
+            $recipe->name = request('name');
+            $recipe->ingredients = request('ingredients');
+            $recipe->preparing_method = request('preparing_method');
+
+            if (request()->hasFile('image')) {
+                Storage::delete('public/recipes-images/' . $recipe->image);
+                $file = request()->file('image');
+                // Generate a file name with extension
+                $fileName = 'recipe-image-' . time() . '.' . $file->getClientOriginalExtension();
+                // Save the file
+                $file->storeAs('public/recipes-images', $fileName);
+                $recipe->image = $fileName;
+            }
+
+            $recipe->save();
+
+            return redirect('system/recipe')->with('success', 'recipe edit successfuly');
+        }
+        return redirect('/system/recipe')->with('error', 'you can\'t edit this post');
     }
 
     /**
@@ -132,9 +158,21 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::findOrFail($id);
         if (Auth::user()->id == $recipe->nutritionist_id) {
+            Storage::delete('public/recipes-images/' . $recipe->image);
             $recipe->delete();
             return redirect('system/recipe')->with('success', 'recipe deleted successfully');
         }
         return redirect('/system/recipe')->with('error', 'you can\'t delete this post');
+    }
+
+    public function indexMine()
+    {
+        $user = Auth::user();
+        if ($user->hasRole('nutritionist')) {
+            return view('system.recipes.index', [
+                'recipes' => Auth::user()->writedRecipes
+            ]);
+        }
+        // return redirect();
     }
 }

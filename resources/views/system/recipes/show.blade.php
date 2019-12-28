@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col col-12">
                     <div class="card" style="">
-                        <img src="http://www.imgworlds.com/wp-content/uploads/2015/12/18-CONTACTUS-HEADER.jpg" class="card-img-top" alt="" style="">
+                        <img src="{{ url('storage/recipes-images/'.$recipe->image) }}" class="card-img-top" alt="" style="">
                         <div class="card-body">
                             <h1 class="display-4">{{ $recipe->name }}</h1>
                             <hr>
@@ -47,16 +47,22 @@
                             <p>{{$recipe->preparing_method}}</p>
                             <hr>
                             <div class="float-left">
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> {{$recipe->nutritionist->name}}</span>
                                 <span class="badge badge-dark"><i class="far fa-clock"></i> {{$recipe->created_at}}</span>
                             </div>
-                            <div class="float-right">
-                                <a href="{{ url('system/recipe/'. $recipe->id . "/edit") }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form class="d-inline" action="{{ url('system/recipe/'. $recipe->id) }}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                </form>
-                            </div>
+
+                            @role('nutritionist')
+                                @if (Auth::user()->id == $recipe->nutritionist_id)
+                                <div class="float-right">
+                                    <a href="{{ url('system/recipe/'. $recipe->id . "/edit") }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form class="d-inline" action="{{ url('system/recipe/'. $recipe->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                                @endif
+                            @endrole
                         </div>
                     </div>
                 </div>

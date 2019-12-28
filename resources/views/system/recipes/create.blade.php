@@ -37,7 +37,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ url("system/recipe") }}" method="POST">
+    <form action="{{ url("system/recipe") }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
         <label for="name">Recipe Name</label>
@@ -54,11 +54,9 @@
             <textarea type="text" rows="5"
             class="form-control" name="preparing_method" id="preparing_method"></textarea>
         </div>
-
         <div class="form-group">
-          <label for=""></label>
-          <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
-          <small id="fileHelpId" class="form-text text-muted">recipe image</small>
+          <label for="image">image</label>
+          <input type="file" class="form-control-file" name="image" id="image" placeholder="image" aria-describedby="fileHelpId">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

@@ -37,7 +37,8 @@
 @endsection
 
 @section('content')
-    <form action="{{ url("system/recipe/". $recipe->id) }}" method="POST">
+    <img src="{{ url('storage/recipes-images/'.$recipe->image) }}" class="card-img-top" alt="" style="">
+    <form action="{{ url("system/recipe/". $recipe->id) }}" method="POST" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="form-group">
@@ -54,9 +55,8 @@
         </div>
 
         <div class="form-group">
-          <label for=""></label>
-          <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
-          <small id="fileHelpId" class="form-text text-muted">recipe image</small>
+          <label for="image">image</label>
+          <input type="file" class="form-control-file" name="image" id="image" placeholder="image" aria-describedby="fileHelpId">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
