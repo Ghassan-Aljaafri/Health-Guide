@@ -1,5 +1,5 @@
- 
- 
+
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,14 +9,14 @@
             <title>Healthy Guide</title>
             <meta name="description" content="">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
             <!-- <link rel="manifest" href="site.webmanifest"> -->
             <!-- Place favicon.ico in the root directory -->
-        
-        
+
+
             <!--  Arabic Fonts-->
             <link href="https://fonts.googleapis.com/css?family=Amiri|Aref+Ruqaa|Cairo|Lalezar&display=swap" rel="stylesheet">
-        
+
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
             <!-- CSS here -->
             <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -36,7 +36,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-       
+
     </head>
     <body>
                 <header>
@@ -75,13 +75,13 @@
                                         <div class="mobile_menu d-block d-lg-none"></div>
                                     </div>
                                 </div>
-            
+
                             </div>
                         </div>
                     </div>
                 </header>
                 <!-- header-end -->
-            
+
                 <!-- slider_area_start -->
                 <div class="slider_area">
                     <div class="single_slider  d-flex align-items-center slider_bg_1">
@@ -104,7 +104,7 @@
                 <!-- recepie_area_start  -->
                 <div class="recepie_area">
                     <div class="container">
-            
+
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4">
@@ -113,11 +113,11 @@
                                 </div>
                             </div>
                         </div>
-            
+
                         <div class="col-4">
-            
+
                         </div>
-            
+
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6">
                                 <div class="single_recepie text-center">
@@ -127,7 +127,7 @@
                                     <h3>منشوريا البيض</h3>
                                     <span>Appetizer</span>
                                     <p>الزمن المستغرق : 30 دقيقة</p>
-            
+
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-6">
@@ -149,14 +149,14 @@
                                     <h3>رامن البيض المسلوق</h3>
                                     <span>Appetizer</span>
                                     <p>الزمن المستغرق : 30 دقيقة</p>
-            
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- /recepie_area_start  -->
-            
+
                 <!-- latest_trand     -->
                 <div class="latest_trand_area">
                     <div class="container">
@@ -165,14 +165,14 @@
                                 <div class="trand_info text-center ">
                                     <!-- <p>Thousands of recipes are waiting to be watched</p>
                                         <h3>Discover latest trending recipes</h3> -->
-            
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            
-            
+
+
                 <!-- recepie_videos   -->
                 <div class="recepie_videoes_area">
                     <div class="container">
@@ -184,7 +184,7 @@
                                     <p>تساعد التمارين الرياضية علي بناء العضلات و ذلك لقدرتها علي تحفيز الهرمونات التي تساعد العضلات
                                         علي إمتصاص الأحماض الأمينية الأمر الذي يساهم في نمو العضلات و تقليل الخسائر العضلية الناتجة
                                         عن تقدم العمر</p>
-            
+
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
@@ -204,7 +204,7 @@
                     </div>
                 </div>
                 <!--/ recepie_videos   -->
-            
+
                 <!-- dish_area start
                 <div class=" dish_area">
                                         <div class="container">
@@ -241,15 +241,15 @@
                                         </div>
                                     </div>   -->
                                     <!--/ dish_area start  -->
-            
-            
-            
-            
+
+
+
+
                                     <!--/ latest_trand     -->
-            
-                               
+
+
                                     <!-- / customer_feedback_area  -->
-            
+
                                     <!-- download_app_area -->
                                     <div class="download_app_area">
                                         <div class="container">
@@ -271,7 +271,7 @@
                                                     <div class="download_text">
                                                         <h3 style="font-family: 'Cairo', sans-serif;">  قم بتحميل التطبيق للحصول علي  أفضل الإرشادات الصحية</h3>
                                                         <div class="download_android_apple">
-            
+
                                                             <a href="#">
                                                                 <div class="download_link d-flex">
                                                                     <i class="fa fa-android"></i>
@@ -288,7 +288,7 @@
                                         </div>
                                     </div>
                                     <!--/ download_app_area -->
-            
+
                                     <!-- footer  -->
                                     <footer class="footer">
                                         <div class="footer_top">
@@ -305,7 +305,7 @@
                                                                 <li><a href="#">Power Tools</a></li>
                                                                 <li><a href="#">Marketing Service</a></li>
                                                             </ul>
-            
+
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-2 col-md-6 col-lg-2">
@@ -319,7 +319,7 @@
                                                                 <li><a href="#">Investor Relations</a></li>
                                                                 <li><a href="#">Terms of Service</a></li>
                                                             </ul>
-            
+
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-2 col-md-6 col-lg-2">
@@ -333,7 +333,7 @@
                                                                 <li><a href="#">Investor Relations</a></li>
                                                                 <li><a href="#">Terms of Service</a></li>
                                                             </ul>
-            
+
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-2 col-md-6 col-lg-2">
@@ -347,7 +347,7 @@
                                                                 <li><a href="#">Experts</a></li>
                                                                 <li><a href="#">Agencies</a></li>
                                                             </ul>
-            
+
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-md-6 col-lg-4">
@@ -361,7 +361,7 @@
                                                                 <input type="text" placeholder="Enter your mail">
                                                                 <button type="submit"> <i class="ti-arrow-right"></i> </button>
                                                             </form>
-            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -413,7 +413,7 @@
                                         </div>
                                     </footer>
                                     <!--/ footer  -->
-            
+
                                     <!-- JS here -->
                                     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
                                     <script src="js/vendor/jquery-1.12.4.min.js"></script>
@@ -433,16 +433,16 @@
                                     <script src="js/jquery.magnific-popup.min.js"></script>
                                     <script src="js/plugins.js"></script>
                                     <script src="js/gijgo.min.js"></script>
-            
+
                                     <!--contact js-->
                                     <script src="js/contact.js"></script>
                                     <script src="js/jquery.ajaxchimp.min.js"></script>
                                     <script src="js/jquery.form.js"></script>
                                     <script src="js/jquery.validate.min.js"></script>
                                     <script src="js/mail-script.js"></script>
-            
+
                                     <script src="js/main.js"></script>
-           
+
         </div>
     </body>
 </html>

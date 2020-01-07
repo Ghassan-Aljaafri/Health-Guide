@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/system', function () {
     return view('system.index');
-});
+})->middleware('auth');
 
 Route::resource('/system/user', 'UserController');
 Route::resource('/system/recipe', 'RecipeController');
