@@ -11,21 +11,23 @@
 |
 */
 
-
-
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 Route::get('/system', function () {
     return view('system.index');
 })->middleware('auth');
 
+Route::get('/home', function () {
+    return redirect('/system');
+})->name('home');
+
 Route::resource('/system/user', 'UserController');
+
 Route::resource('/system/recipe', 'RecipeController');
+
 Route::resource('/system/healthy-food-location', 'HealthyFoodLocationController');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();

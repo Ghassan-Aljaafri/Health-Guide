@@ -76,7 +76,7 @@ return [
     'classes_content' => 'container',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-black navbar-dark',
     'classes_topnav_nav' => 'navbar-expand-md',
     'classes_topnav_container' => 'container',
 
@@ -175,11 +175,12 @@ return [
     */
 
     'menu' => [
-        // [
-        //     'text' => 'search',
-        //     'search' => true,
-        //     'topnav' => true,
-        // ],
+        ['header' => 'System'],
+        [
+            'text' => 'search',
+            'search' => true,
+            'topnav' => true,
+        ],
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',
@@ -191,17 +192,6 @@ return [
             'icon'        => 'nav-icon fas fa-tachometer-alt',
             'label'       => 3,
             'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => '/system/user',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
         ],
         [
             'text'    => 'Recipe',
@@ -222,7 +212,7 @@ return [
         ],
         [
             'text'    => 'Healthy Food Locations',
-            'icon'    => 'fas fa-fw fa-utensils',
+            'icon'    => 'fas fa-fw fa-map-marker-alt',
             'submenu' => [
                 [
                     'text' => 'add location',
@@ -237,6 +227,18 @@ return [
                     'url'     => 'system/healthy-food-location',
                 ],
             ],
+        ],
+
+        ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url'  => '/system/user',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'change_password',
+            'url'  => 'password/reset',
+            'icon' => 'fas fa-fw fa-lock',
         ],
     ],
 
