@@ -3,15 +3,13 @@
 @section('title', 'Show Recipe')
 
 @section('content_header')
-    <h1>Show Recipe</h1>
-    <hr>
-@endsection
-
-@section('messages')
     @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-          <h4 class="alert-heading">Errors</h4>
-          <p class="mb-0">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Error</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>
@@ -19,25 +17,37 @@
                     </li>
                 @endforeach
             </ul>
-          </p>
         </div>
     @endif
 
     @if (session('success'))
-        <div class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Success</h4>
-          <p class="mb-0">
-              {{session('success')}}
-          </p>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Success</strong> {{session('success')}}
         </div>
     @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Error</strong> {{session('error')}}
+        </div>
+    @endif
+    <h1>Show Recipe</h1>
+    <hr>
 @endsection
 
 @section('content')
         <div class="row">
             <div class="col col-12">
                     <div class="card" style="">
-                        <img src="{{ url('storage/recipes-images/'.$recipe->image) }}" class="card-img-top" alt="" style="">
+                        <img src="{{ url('storage/recipes_images/'.$recipe->image) }}" class="img-thumbnail img-fluid card-img-top" alt="" style="">
                         <div class="card-body">
                             <h1 class="display-4">{{ $recipe->name }}</h1>
                             <hr>

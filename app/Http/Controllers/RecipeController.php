@@ -49,15 +49,15 @@ class RecipeController extends Controller
      */
     public function store()
     {
-        request()->validate([
-            'name' => 'required|unique:recipes',
-            'ingredients' => 'required',
-            'preparing_method' => 'required',
-            'image' => 'required',
-        ]);
+        if (Auth::user()->hasRole('nutritionist')) {
 
-        $user = Auth::user();
-        if ($user->hasRole('nutritionist')) {
+            request()->validate([
+                'name' => 'required|unique:recipes',
+                'ingredients' => 'required',
+                'preparing_method' => 'required',
+                'image' => 'required',
+            ]);
+
             $recipe = new Recipe();
             $recipe->name = request('name');
             $recipe->ingredients = request('ingredients');
@@ -65,16 +65,16 @@ class RecipeController extends Controller
 
             $file = request()->file('image');
             // Generate a file name with extension
-            $fileName = 'recipe-image-' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = 'recipe_image-' . time() . '.' . $file->getClientOriginalExtension();
             // Save the file
-            $file->storeAs('public/recipes-images', $fileName);
+            $file->storeAs('public/recipes_images', $fileName);
             $recipe->image = $fileName;
 
-            $recipe->nutritionist_id = $user->id;
+            $recipe->nutritionist_id = Auth::id();
             $recipe->save();
             return redirect('system/recipe')->with('success', 'recipe created successfuly');
         } else {
-            return redirect('system');
+            return redirect('system')->with('error', "yor don't have a permission to create recipe");
         }
     }
 
@@ -106,7 +106,7 @@ class RecipeController extends Controller
                 'recipe' => $recipe
             ]);
         }
-        return redirect('/system/recipe')->with('error', 'you can\'t edit this post');
+        return redirect('/system/recipe')->with('error', 'you can\'t edit this recipe');
     }
 
     /**
@@ -118,26 +118,25 @@ class RecipeController extends Controller
      */
     public function update($id)
     {
-        request()->validate([
-            'name' => 'required',
-            'ingredients' => 'required',
-            'preparing_method' => 'required',
-        ]);
-
         $recipe = Recipe::findOrFail($id);
-
         if (Auth::user()->id == $recipe->nutritionist_id) {
+            request()->validate([
+                'name' => 'required',
+                'ingredients' => 'required',
+                'preparing_method' => 'required',
+            ]);
+
             $recipe->name = request('name');
             $recipe->ingredients = request('ingredients');
             $recipe->preparing_method = request('preparing_method');
 
             if (request()->hasFile('image')) {
-                Storage::delete('public/recipes-images/' . $recipe->image);
+                Storage::delete('public/recipes_images/' . $recipe->image);
                 $file = request()->file('image');
                 // Generate a file name with extension
-                $fileName = 'recipe-image-' . time() . '.' . $file->getClientOriginalExtension();
+                $fileName = 'recipe_image_' . time() . '.' . $file->getClientOriginalExtension();
                 // Save the file
-                $file->storeAs('public/recipes-images', $fileName);
+                $file->storeAs('public/recipes_images', $fileName);
                 $recipe->image = $fileName;
             }
 
@@ -158,7 +157,7 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::findOrFail($id);
         if (Auth::user()->id == $recipe->nutritionist_id) {
-            Storage::delete('public/recipes-images/' . $recipe->image);
+            Storage::delete('public/recipes_images/' . $recipe->image);
             $recipe->delete();
             return redirect('system/recipe')->with('success', 'recipe deleted successfully');
         }

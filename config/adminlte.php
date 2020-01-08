@@ -220,6 +220,24 @@ return [
                 ],
             ],
         ],
+        [
+            'text'    => 'Healthy Food Locations',
+            'icon'    => 'fas fa-fw fa-utensils',
+            'submenu' => [
+                [
+                    'text' => 'add location',
+                    'icon'    => 'fas fa-fw fa-plus',
+                    'role' => 'admin',
+                    // 'permission'  => 'publish-healthy food',
+                    'url'  => 'system/healthy-food-location/create',
+                ],
+                [
+                    'text'    => 'all locations',
+                    'icon'    => 'fas fa-fw fa-eye',
+                    'url'     => 'system/healthy-food-location',
+                ],
+            ],
+        ],
     ],
 
     /*

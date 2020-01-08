@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Create healthy food location')
+@section('title', 'Show Recipe')
 
 @section('content_header')
-    @if ($errors->any())
+@if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -39,45 +39,41 @@
             <strong>Error</strong> {{session('error')}}
         </div>
     @endif
-    <h1>Create New Place</h1>
+<h1>Show Recipe</h1>
     <hr>
 @endsection
 
 @section('content')
-    <form action="{{ url("system/healthy-food-location") }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="name">Place name</label>
-            <input type="text" class="form-control" name="name" id="name">
-        </div>
-
-        <div class="form-group">
-            <label for="working_time">working time</label>
-            <input type="text" class="form-control" name="working_time" id="working_time">
-        </div>
-
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" class="form-control-file" name="image" id="image" placeholder="Image" aria-describedby="fileHelpId">
-            <small id="fileHelpId" class="form-text text-muted">place image</small>
-        </div>
-
         <div class="row">
-            <div class="form-group col-6">
-                <label for="latitude">Place latitude</label>
-                <input type="text" class="form-control" name="latitude" id="latitude">
-            </div>
-
-            <div class="form-group col-6">
-                <label for="longitude">Place longitude</label>
-                <input type="text" class="form-control" name="longitude" id="longitude">
-            </div>
+            <div class="col col-12">
+                    <div class="card">
+                        <img src="{{ url('storage/healthy_food_locations_images/'.$healthy_food_location->image) }}" class="img-thumbnail img-fluid card-img-top" alt="" style="">
+                        <div class="card-body">
+                            <h1 class="display-4">{{ $healthy_food_location->name }}</h1>
+                            <hr>
+                            <h4 class="">working time</h4>
+                            <p>{{$healthy_food_location->working_time}}</p>
+                            <hr>
+                            <div id="map"></div>
+                            <br>
+                            <div class="float-left">
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> Admin</span>
+                                <span class="badge badge-dark"><i class="far fa-clock"></i> {{$healthy_food_location->created_at}}</span>
+                            </div>
+                            @role('admin')
+                                <div class="float-right">
+                                    <a href="{{ url('system/healthy-food-location/'. $healthy_food_location->id . "/edit") }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form class="d-inline" action="{{ url('system/healthy-food-location/'. $healthy_food_location->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            @endrole
+                        </div>
+                    </div>
+                </div>
         </div>
-
-
-        <div id="map"></div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
 @endsection
 
 @section('css')
@@ -99,11 +95,11 @@
 
             var map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 14,
-                center: { lat: 32.8949,lng: 13.1812 }
+                center: { lat: {{ $healthy_food_location->latitude }},lng: {{ $healthy_food_location->longitude }} }
             });
 
             var marker = new google.maps.Marker({
-            //     position: location,
+                position: { lat: {{ $healthy_food_location->latitude }},lng: {{ $healthy_food_location->longitude }} },
                 map: map
             });
 

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'All Recipes')
+@section('title', 'All Locations')
 
 @section('content_header')
 @if ($errors->any())
@@ -40,10 +40,10 @@
         </div>
     @endif
 
-<h1 class="float-left">Show All Recipes</h1>
-    @if (Auth::user()->hasPermissionTo('publish-recipe'))
+<h1 class="float-left">Show All Locations</h1>
+    @if (Auth::user()->hasRole('admin'))
         <div class="float-right">
-            <a class="btn btn-primary" href="{{url('system/recipe/create')}}"><i class="fa fa-plus"></i> Create New</a>
+            <a class="btn btn-primary" href="{{url('system/healthy-food-location/create')}}"><i class="fa fa-plus"></i> Create New</a>
         </div>
     @endif
     <div class="clearfix"></div>
@@ -52,29 +52,27 @@
 
 
 @section('content')
-    @if ($recipes->count())
+    @if ($healthy_food_locations->count())
         <div class="row">
-            @foreach ($recipes as $recipe)
+            @foreach ($healthy_food_locations as $healthy_food_location)
                 <div class="col col-md-6 col-sm-12">
                     <div class="card" style="">
-                        <img src="{{ url('storage/recipes_images/'.$recipe->image) }}" class="img-fluid card-img-left" alt="">
+                        <img src="{{ url('storage/healthy_food_locations_images/'.$healthy_food_location->image) }}" class="img-fluid card-img-left" alt="">
                         <div class="card-body">
-                            <h5 class="">{{ $recipe->name }}</h5>
+                            <h5 class="">{{ $healthy_food_location->name }}</h5>
                             <div class="float-left">
-                                <span class="badge badge-primary"><i class="fa fa-user"></i> {{$recipe->nutritionist->name}}</span>
-                                <span class="badge badge-dark"><i class="far fa-clock"></i> {{$recipe->created_at}}</span>
+                                <span class="badge badge-primary"><i class="fa fa-user"></i> Admin</span>
+                                <span class="badge badge-dark"><i class="far fa-clock"></i> {{$healthy_food_location->created_at}}</span>
                             </div>
                             <div class="float-right">
-                                <a href="{{ url('system/recipe/'. $recipe->id) }}" class="btn btn-sm btn-info">View</a>
-                                @role('nutritionist')
-                                    @if (Auth::user()->id == $recipe->nutritionist_id)
-                                        <a href="{{ url('system/recipe/'. $recipe->id."/edit") }}" class="btn btn-sm btn-warning">Edit</a>
-                                        <form class="d-inline" action="{{ url('system/recipe/'. $recipe->id) }}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
-                                    @endif
+                                <a href="{{ url('system/healthy-food-location/'. $healthy_food_location->id) }}" class="btn btn-sm btn-info">View</a>
+                                @role('admin')
+                                    <a href="{{ url('system/healthy-food-location/'. $healthy_food_location->id."/edit") }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form class="d-inline" action="{{ url('system/healthy-food-location/'. $healthy_food_location->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
                                 @endrole
                             </div>
                         </div>
@@ -84,8 +82,8 @@
         </div>
     @else
         <div class="alert alert-warning" role="alert">
-          <h4 class="alert-heading">no Recipes</h4>
-          <p>no Recipes</p>
+          <h4 class="alert-heading">no healthy food location</h4>
+          <p>no healthy food location</p>
         </div>
     @endif
 @endsection

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Create healthy food location')
+@section('title', 'Edit healthy food location')
 
 @section('content_header')
     @if ($errors->any())
@@ -39,21 +39,23 @@
             <strong>Error</strong> {{session('error')}}
         </div>
     @endif
-    <h1>Create New Place</h1>
+    <h1>Edit Place</h1>
     <hr>
 @endsection
 
 @section('content')
-    <form action="{{ url("system/healthy-food-location") }}" method="POST" enctype="multipart/form-data">
+    <img src="{{ url('storage/healthy_food_locations_images/'.$healthy_food_location->image) }}" class="img-thumbnail img-fluid card-img-top" alt="no image">
+    <form class="col" action="{{ url("system/healthy-food-location/".$healthy_food_location->id) }}" method="POST" enctype="multipart/form-data">
+        @method('PATCH')
         @csrf
         <div class="form-group">
             <label for="name">Place name</label>
-            <input type="text" class="form-control" name="name" id="name">
+            <input type="text" class="form-control" value="{{ $healthy_food_location->name }}" name="name" id="name">
         </div>
 
         <div class="form-group">
             <label for="working_time">working time</label>
-            <input type="text" class="form-control" name="working_time" id="working_time">
+            <input type="text" class="form-control" value="{{ $healthy_food_location->working_time }}" name="working_time" id="working_time">
         </div>
 
         <div class="form-group">
@@ -64,19 +66,18 @@
 
         <div class="row">
             <div class="form-group col-6">
-                <label for="latitude">Place latitude</label>
-                <input type="text" class="form-control" name="latitude" id="latitude">
+                <label for="longitude">Place longitude</label>
+                <input type="text" class="form-control" value="{{ $healthy_food_location->longitude }}" name="longitude" id="longitude">
             </div>
 
             <div class="form-group col-6">
-                <label for="longitude">Place longitude</label>
-                <input type="text" class="form-control" name="longitude" id="longitude">
+                <label for="latitude">Place latitude</label>
+                <input type="text" class="form-control" value="{{ $healthy_food_location->latitude }}" name="latitude" id="latitude">
             </div>
         </div>
 
-
         <div id="map"></div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Save</button>
     </form>
 @endsection
 
@@ -99,11 +100,11 @@
 
             var map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 14,
-                center: { lat: 32.8949,lng: 13.1812 }
+                center: { lat: {{ $healthy_food_location->latitude }},lng: {{ $healthy_food_location->longitude }} }
             });
 
             var marker = new google.maps.Marker({
-            //     position: location,
+                position: { lat: {{ $healthy_food_location->latitude }},lng: {{ $healthy_food_location->longitude }} },
                 map: map
             });
 

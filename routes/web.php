@@ -24,6 +24,7 @@ Route::get('/system', function () {
 
 Route::resource('/system/user', 'UserController');
 Route::resource('/system/recipe', 'RecipeController');
+Route::resource('/system/healthy-food-location', 'HealthyFoodLocationController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

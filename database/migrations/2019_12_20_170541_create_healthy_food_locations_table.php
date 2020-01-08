@@ -18,11 +18,11 @@ class CreateHealthyFoodLocationsTable extends Migration
             $table->timestamps();
 
             // added by us
-            $table->string('place_name');
-            $table->float('longitude');
-            $table->float('latitude');
-            $table->string('working_time');
-            $table->string('image');
+            $table->string('name');
+            $table->string('longitude');
+            $table->string('latitude');
+            $table->string('working_time')->nullable();
+            $table->string('image')->nullable();
         });
     }
 
