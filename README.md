@@ -1,21 +1,27 @@
 ## Configuration Steps
 
->copy .env.example file to .env
+1) **copy .env.example file to .env**
 >
->create new Database
+2) **create new Database**
 >
->edit .env file :point_down:
->
->
->DB_DATABASE=
->
->DB_USERNAME=
->
->DB_PASSWORD=
+3) **edit .env file :point_down:**
+    >
+    >DB_DATABASE=
+    >
+    >DB_USERNAME=
+    >
+    >DB_PASSWORD=
 
-1) ```$ composer install```
-2) ```$ php artisan key:generate```
-3) ```$ php artisan jwt:secret```
-4) ```$ php artisan migrate --seed```
+4) **Open Terminal and type these commands**
+    
+    ```$ composer install```
+    
+    ```$ php artisan key:generate```
+    
+    ```$ php artisan jwt:secret```
+    
+    ```$ php artisan migrate --seed```
+
+
 
 Thank you :+1::heart:
