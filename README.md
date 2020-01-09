@@ -22,6 +22,31 @@
     
     ```$ php artisan migrate --seed```
 
+Good Jop:+1:
+
+## Seeder will provide 
+
+* **6 Users**
+
+        * Email:
+
+            admin@hg.local
+            admin2@hg.local
+            nutritionist@hg.local
+            nutritionist2@hg.local
+            patient@hg.local
+            patient2@hg.local
+
+        * Password: 1234
 
 
-Thank you :+1::heart:
+* **4 Roles**
+
+        super-admin
+        admin
+        nutritionist
+        patient
+
+* **some permissions**
+
+Thank you :heart:
