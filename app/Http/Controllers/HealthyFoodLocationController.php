@@ -141,7 +141,7 @@ class HealthyFoodLocationController extends Controller
                 $healthy_food_location->image = $fileName;
             }
             $healthy_food_location->save();
-            return redirect('system/healthy-food-location')->with('success', 'location created successfuly');
+            return redirect('system/healthy-food-location')->with('success', 'location updated successfuly');
         }
 
         return redirect('system/healthy-food-location')->with('error', "yor don't have a permission to edit Healthy Food Location");
