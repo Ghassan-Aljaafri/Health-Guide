@@ -190,7 +190,7 @@ return [
             'text'        => 'DashBoard',
             'url'         => '/system',
             'icon'        => 'nav-icon fas fa-tachometer-alt',
-            'label'       => 3,
+            'label'       => 5,
             'label_color' => 'success',
         ],
         [

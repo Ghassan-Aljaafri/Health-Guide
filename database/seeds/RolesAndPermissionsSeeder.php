@@ -23,12 +23,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'unpublish-recipe']);
 
         // create roles and assign created permissions
-
-        // this can be done as separate statements
         $role = Role::create(['name' => 'patient']);
-        //$role->givePermissionTo('edit articles');
-
-        // or may be done by chaining
         $role = Role::create(['name' => 'nutritionist']);
         $role->givePermissionTo([
             'edit-recipe',
@@ -36,10 +31,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'publish-recipe',
             'unpublish-recipe'
         ]);
-
         $role = Role::create(['name' => 'admin']);
-        //$role->givePermissionTo(Permission::all());
-
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
     }
