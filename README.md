@@ -42,7 +42,6 @@ Good Jop:+1:
 
 * **4 Roles**
 
-        super-admin
         admin
         nutritionist
         patient
