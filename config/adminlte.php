@@ -295,6 +295,17 @@ return [
             ],
         ],
         [
+            'name' => 'Google Map',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDlKKCHDkN8JKdZHsB8o2oeQxSI0vQJmzg&callback=initMap',
+                ],
+            ],
+        ],
+        [
             'name' => 'Select2',
             'active' => false,
             'files' => [

@@ -122,7 +122,5 @@
             });
         }
     </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4fQKTJYNALAWAsnAKse4eAGaEbOAswq4&callback=initMap"async defer></script>
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPNwROWQzFCDpXfx4nQlbdFaD7IE5F_lE&callback=initMap"async defer></script> --}}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlKKCHDkN8JKdZHsB8o2oeQxSI0vQJmzg&callback=initMap"async defer></script>
 @endsection

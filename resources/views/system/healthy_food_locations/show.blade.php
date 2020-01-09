@@ -102,23 +102,7 @@
                 position: { lat: {{ $healthy_food_location->latitude }},lng: {{ $healthy_food_location->longitude }} },
                 map: map
             });
-
-            google.maps.event.addListener(map, 'click', function(event) {
-                marker.setMap(null);
-                marker = new google.maps.Marker({
-                    position: {
-                        lat: event.latLng.lat(),
-                        lng: event.latLng.lng()
-                    },
-                    map: map
-                });
-
-                lat.value = event.latLng.lat();
-                lng.value = event.latLng.lng();
-            });
         }
     </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4fQKTJYNALAWAsnAKse4eAGaEbOAswq4&callback=initMap"async defer></script>
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPNwROWQzFCDpXfx4nQlbdFaD7IE5F_lE&callback=initMap"async defer></script> --}}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlKKCHDkN8JKdZHsB8o2oeQxSI0vQJmzg&callback=initMap"async defer></script>
 @endsection
