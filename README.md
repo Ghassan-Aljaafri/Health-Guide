@@ -4,10 +4,13 @@
 >
 >create new Database
 >
->edit .env file
+>edit .env file :point_down:
+>
 >
 >DB_DATABASE=
+>
 >DB_USERNAME=
+>
 >DB_PASSWORD=
 
 1) ```$ composer install```
