@@ -175,17 +175,18 @@ return [
     */
 
     'menu' => [
-        ['header' => 'System'],
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',
         //     'can'  => 'manage-blog',
         // ],
+        [
+            'text' => 'Landing Page',
+            'url'  => '',
+            'topnav' => true,
+            'icon' => 'fas fa-fw fa-globe',
+        ],
+        ['header' => 'System'],
         [
             'text'        => 'DashBoard',
             'url'         => '/system',
@@ -228,11 +229,16 @@ return [
                 ],
             ],
         ],
-
         ['header' => 'account_settings'],
         [
+            'text' => 'add user',
+            'icon'    => 'fas fa-fw fa-plus',
+            'role' => 'admin',
+            'url'  => 'register',
+        ],
+        [
             'text' => 'profile',
-            'url'  => '/system/user',
+            'url'  => '/system/user/id',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

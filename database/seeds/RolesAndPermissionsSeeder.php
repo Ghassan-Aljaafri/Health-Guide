@@ -32,7 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'unpublish-recipe'
         ]);
         $role = Role::create(['name' => 'admin']);
-        $role = Role::create(['name' => 'super-admin']);
+        // $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
     }
 }
