@@ -73,7 +73,7 @@ return [
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_header' => 'container',
-    'classes_content' => 'container',
+    'classes_content' => 'container pb-5',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-black navbar-dark',
