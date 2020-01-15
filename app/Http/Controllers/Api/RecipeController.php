@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Recipe;
 use Illuminate\Support\Facades\Auth;
@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
+    /**
+     *
+     * @return void
+     */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth');
-        // $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -21,36 +25,19 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        return view('system.recipes.index', [
-            'recipes' => Recipe::all()
+        return response()->json([
+            'recipes' => Recipe::with('nutritionist')->get()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $user = Auth::user();
-        if ($user->hasRole('nutritionist')) {
-            return view('system.recipes.create');
-        } else {
-            return redirect('system/recipe')->with('error', "yor don't have a permission to create recipe");
-        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store()
     {
         if (Auth::user()->hasRole('nutritionist')) {
-
             request()->validate([
                 'name' => 'required|unique:recipes',
                 'ingredients' => 'required',
@@ -72,53 +59,41 @@ class RecipeController extends Controller
 
             $recipe->nutritionist_id = Auth::id();
             $recipe->save();
-            return redirect('system/recipe')->with('success', 'recipe created successfuly');
+            $recipe->nutritionist;
+            return response()->json([
+                'message' => 'recipe created successfuly',
+                'recipe' => $recipe,
+            ]);
+
         } else {
-            return redirect('system')->with('error', "yor don't have a permission to create recipe");
+            return response()->json([
+                'message' => 'yor don\'t have a permission to create recipe'
+            ], 403);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Recipe $recipe)
     {
-        $recipe = Recipe::findOrFail($id);
-        return view('system.recipes.show', [
-            'recipe' => $recipe
+        $recipe->nutritionist;
+        return response()->json([
+            'recipe' => $recipe,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $recipe = Recipe::findOrFail($id);
-        if (Auth::user()->id == $recipe->nutritionist_id) {
-            return view('system.recipes.edit', [
-                'recipe' => $recipe
-            ]);
-        }
-        return redirect('/system/recipe')->with('error', 'you can\'t edit this recipe');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Recipe $recipe)
     {
-        $recipe = Recipe::findOrFail($id);
         if (Auth::user()->id == $recipe->nutritionist_id) {
             request()->validate([
                 'name' => 'required',
@@ -141,37 +116,34 @@ class RecipeController extends Controller
             }
 
             $recipe->save();
-
-            return redirect('system/recipe')->with('success', 'recipe edit successfuly');
+            $recipe->nutritionist;
+            return response()->json([
+                'message' => 'recipe edit successfuly',
+                'recipe' => $recipe,
+            ]);
         }
-        return redirect('/system/recipe')->with('error', 'you can\'t edit this recipe');
+        return response()->json([
+            'message' => 'you can\'t edit this recipe'
+        ], 403);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Recipe $recipe)
     {
-        $recipe = Recipe::findOrFail($id);
         if (Auth::user()->id == $recipe->nutritionist_id) {
             Storage::delete('public/recipes_images/' . $recipe->image);
             $recipe->delete();
-            return redirect('system/recipe')->with('success', 'recipe deleted successfully');
-        }
-        return redirect('/system/recipe')->with('error', 'you can\'t delete this post');
-    }
-
-    public function indexMine()
-    {
-        $user = Auth::user();
-        if ($user->hasRole('nutritionist')) {
-            return view('system.recipes.index', [
-                'recipes' => Auth::user()->writedRecipes
+            return response()->json([
+                'message' => 'Recipe deleted successfully'
             ]);
         }
-        // return redirect();
+        return response()->json([
+            'message' => 'you can\'t delete this post'
+        ], 403);
     }
 }
