@@ -28,3 +28,4 @@ Route::group([
 });
 
 Route::apiResource('/recipe', 'Api\RecipeController');
+Route::apiResource('/healthy-food-location', 'Api\HealthyFoodLocationController');

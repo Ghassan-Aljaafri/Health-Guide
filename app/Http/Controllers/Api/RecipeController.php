@@ -65,11 +65,10 @@ class RecipeController extends Controller
                 'recipe' => $recipe,
             ]);
 
-        } else {
-            return response()->json([
-                'message' => 'yor don\'t have a permission to create recipe'
-            ], 403);
         }
+        return response()->json([
+            'message' => 'yor don\'t have a permission to create recipe'
+        ], 403);
     }
 
     /**
@@ -143,7 +142,7 @@ class RecipeController extends Controller
             ]);
         }
         return response()->json([
-            'message' => 'you can\'t delete this post'
+            'message' => 'you can\'t delete this recipe'
         ], 403);
     }
 }
